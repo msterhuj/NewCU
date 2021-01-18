@@ -21,7 +21,7 @@ services:
     environment:
       - PUID=1000
       - PGID=1000
-      - TZ=Europe/London
+      - TZ=Europe/Paris
       - UMASK_SET=022 #optional
     volumes:
       - sonarr_config:/config
@@ -39,7 +39,7 @@ services:
     environment:
       - PUID=1000
       - PGID=1000
-      - TZ=Europe/London
+      - TZ=Europe/Paris
       - UMASK_SET=022 #optional
     volumes:
       - radarr_config:/config
@@ -76,11 +76,11 @@ services:
   plex:
     image: ghcr.io/linuxserver/plex
     container_name: plex
-    #network_mode: host
     environment:
       - PUID=1000
       - PGID=1000
       - VERSION=docker
+      - TZ=Europe/Paris
       - UMASK_SET=022 #optional
     #  - PLEX_CLAIM= #optional
     volumes:
@@ -89,4 +89,13 @@ services:
       - plex_movies:/movies
     ports:
       - 32400:32400
+      - 1900:1900
+      - 3005:3005
+      - 5353:5353
+      - 8324:8324
+      - 32410:32410
+      - 32412:32412
+      - 32413:32413
+      - 32414:32414
+      - 32469:32469
     restart: unless-stopped
