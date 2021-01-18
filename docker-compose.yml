@@ -5,9 +5,7 @@ volumes:
   transmission_download:
   transmission_watch:
   sonarr_config:
-  sonarr_download:
   radarr_config:
-  radarr_downloads:
   plex_config:
   plex_tv:
   plex_movies:
@@ -26,7 +24,7 @@ services:
     volumes:
       - sonarr_config:/config
       - plex_tv:/tv
-      - sonarr_download:/downloads
+      - transmission_download:/downloads
     ports:
       - 8989:8989
     depends_on:
@@ -44,7 +42,7 @@ services:
     volumes:
       - radarr_config:/config
       - plex_movies:/movies
-      - radarr_downloads:/downloads
+      - transmission_download:/downloads
     ports:
       - 7878:7878
     depends_on:
@@ -59,8 +57,8 @@ services:
       - PGID=1000
       - TZ=Europe/Paris
       #- TRANSMISSION_WEB_HOME=/combustion-release/ #optional
-      #- USER=username #optional
-      #- PASS=password #optional
+      - USER=username #optional
+      - PASS=password #optional
     volumes:
       - transmission_config:/config
       - transmission_download:/downloads
