@@ -1,0 +1,4 @@
+docker volume rm dufflix_transmission_config dufflix_transmission_download dufflix_transmission_watch
+docker volume rm dufflix_sonarr_config dufflix_sonarr_tv dufflix_sonarr_download
+docker volume rm dufflix_radarr_config dufflix_radarr_movies dufflix_radarr_downloads
+docker volume rm dufflix_plex_config dufflix_plex_tv dufflix_plex_movies

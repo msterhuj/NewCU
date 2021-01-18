@@ -1,0 +1,94 @@
+version: '3.3'
+
+volumes:
+  transmission_config:
+  transmission_download:
+  transmission_watch:
+  sonarr_config:
+  sonarr_tv:
+  sonarr_download:
+  radarr_config:
+  radarr_movies:
+  radarr_downloads:
+  plex_config:
+  plex_tv:
+  plex_movies:
+  
+
+services:
+
+  sonarr:
+    image: ghcr.io/linuxserver/sonarr
+    container_name: sonarr
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/London
+      - UMASK_SET=022 #optional
+    volumes:
+      - sonarr_config:/config
+      - sonarr_tv:/tv
+      - sonarr_download:/downloads
+    ports:
+      - 8989:8989
+    depends_on:
+      - transmission
+    restart: unless-stopped
+
+  radarr:
+    image: ghcr.io/linuxserver/radarr
+    container_name: radarr
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/London
+      - UMASK_SET=022 #optional
+    volumes:
+      - radarr_config:/config
+      - radarr_movies:/movies
+      - radarr_downloads:/downloads
+    ports:
+      - 7878:7878
+    depends_on:
+      - transmission
+    restart: unless-stopped
+
+  transmission:
+    image: ghcr.io/linuxserver/transmission
+    container_name: transmission
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/Paris
+      #- TRANSMISSION_WEB_HOME=/combustion-release/ #optional
+      #- USER=username #optional
+      #- PASS=password #optional
+    volumes:
+      - transmission_config:/config
+      - transmission_download:/downloads
+      - transmission_watch:/watch
+    ports:
+      - 9091:9091
+      - 51413:51413
+      - 51413:51413/udp
+    depends_on:
+      - plex
+    restart: unless-stopped
+  
+  plex:
+    image: ghcr.io/linuxserver/plex
+    container_name: plex
+    #network_mode: host
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - VERSION=docker
+      - UMASK_SET=022 #optional
+    #  - PLEX_CLAIM= #optional
+    volumes:
+      - plex_config:/config
+      - plex_tv:/tv
+      - plex_movies:/movies
+    ports:
+      - 32400:32400
+    restart: unless-stopped
