@@ -5,10 +5,8 @@ volumes:
   transmission_download:
   transmission_watch:
   sonarr_config:
-  sonarr_tv:
   sonarr_download:
   radarr_config:
-  radarr_movies:
   radarr_downloads:
   plex_config:
   plex_tv:
@@ -27,7 +25,7 @@ services:
       - UMASK_SET=022 #optional
     volumes:
       - sonarr_config:/config
-      - sonarr_tv:/tv
+      - plex_tv:/tv
       - sonarr_download:/downloads
     ports:
       - 8989:8989
@@ -45,7 +43,7 @@ services:
       - UMASK_SET=022 #optional
     volumes:
       - radarr_config:/config
-      - radarr_movies:/movies
+      - plex_movies:/movies
       - radarr_downloads:/downloads
     ports:
       - 7878:7878
