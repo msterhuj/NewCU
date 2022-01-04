@@ -1,12 +1,11 @@
-# Dufflix
+# NewCU
 
-> Basé sur la vidéo de `Léo Duff - J'ai créé mon propre Netflix !`
-
-## Service interne
-|Nom         |Tache                                   |Site                |
-|------------|----------------------------------------|--------------------|
-|Trakt       |track les films et séries               |`trakt.tv`          |
-|Radarr      |Chercheur de films en fonction de trakt |`radarr.video`      |
-|Sonarr      |Chercheur de séries en fonction de trakt|`sonarr.tv`         |
-|Transmission|Téléchargement de torrent               |`transmissionbt.com`|
-|Plex        |Interface pour regarder les films/séries|`plex.tv`           | 
+## Installed Service
+|Nom         |Tache                                                     |
+|------------|----------------------------------------------------------|
+|flaresolverr|Bypass l'anti ddos cloudflare                             |
+|jackett     |Interfaceur entre les site de torrent et radarr/sonarr    |
+|Radarr      |Chercheur de films et les mes a download dans qbittorrent |
+|Sonarr      |Chercheur de séries et les mes a download dans qbittorrent|
+|qbittorrent |Téléchargement de torrent                                 |
+|jellyfin    |Interface pour regarder les films/séries                  |
